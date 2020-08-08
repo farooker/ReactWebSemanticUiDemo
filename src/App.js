@@ -1,26 +1,38 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
+import Content from './ComponentMain/AppContent';
+import Footer from './ComponentMain/AppFooter';
+import DesktopContainer from './ComponentMain/DesktopContainer';
+import MobileContainer from './ComponentMain/MobileContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+DesktopContainer.propTypes = {
+  children: PropTypes.node,
 }
 
-export default App;
+MobileContainer.propTypes = {
+  children: PropTypes.node,
+}
+const ResponsiveContainer = ({ children }) => (
+  <div>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+)
+
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node,
+}
+
+const App= () => (
+  <BrowserRouter>
+      <ResponsiveContainer>
+         <Content/>
+         <Footer/>
+      </ResponsiveContainer>
+  </BrowserRouter>
+
+
+)
+
+export default App
